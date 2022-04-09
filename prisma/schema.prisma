@@ -9,11 +9,22 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
+// prisma/schema.prisma
+
+model User {
+  id           Int           @id @default(autoincrement())
+  email        String        @unique
+  courses      Course[]
+  createdAt    DateTime      @default(now())
+}
+
 model Course {
-    id        Int      @id @default(autoincrement())
-    title     String   @unique
-    createdAt DateTime @default(now())
-    lessons   Lesson[]
+  id        Int      @id @default(autoincrement())
+  title     String   @unique
+  description     String
+  lessons   Lesson[]
+  users     User[]
+  createdAt DateTime @default(now())
 }
 
 model Lesson {
@@ -23,3 +34,5 @@ model Lesson {
     createdAt DateTime @default(now())
     course    Course   @relation(fields: [courseId], references: [id])
 }
+
+

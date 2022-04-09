@@ -1,6 +1,8 @@
 import { getCourses } from "../utils/db";
-
+import { useUser } from "@auth0/nextjs-auth0";
 const Index = ({ courses }) => {
+  const { error, user, loading } = useUser();
+  console.log("USER", user);
   return (
     <div>
       <h1>Courses</h1>
